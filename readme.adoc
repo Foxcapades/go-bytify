@@ -1,5 +1,11 @@
 = Go Bytify
 
+image:https://img.shields.io/github/v/tag/foxcapades/go-bytify[GitHub tag (latest SemVer)]
+image:https://img.shields.io/github/go-mod/go-version/foxcapades/go-bytify[GitHub go.mod Go version]
+image:https://img.shields.io/github/license/foxcapades/go-bytify[GitHub]
+image:https://github.com/Foxcapades/go-bytify/workflows/Go/badge.svg[Go]
+image:https://codecov.io/gh/Foxcapades/go-bytify/branch/main/graph/badge.svg?token=E4WD9IURJL[title=codecov, link=https://codecov.io/gh/Foxcapades/go-bytify]
+
 A dead simple library for writing various types to byte buffers.
 
 Bytify is intended for those who pursue senseless, borderline silly
