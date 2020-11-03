@@ -57,13 +57,17 @@ Added the following feature complete methods with full test coverage:
 [cols="1m,2m",options="header"]
 |===
 | Type | Functions
-| uint8 | Uint8ToBytes(uint8, []byte) +
+| uint8 | Uint8ToBytes(uint8, []byte)
+
 Uint8ToBuf(uint8, io.Writer)
-| uint16 | Uint16ToBytes(uint16, []byte) +
+| uint16 | Uint16ToBytes(uint16, []byte)
+
 Uint16ToBuf(uint16, io.Writer)
-| uint32 | Uint32ToBytes(uint32, []byte) +
+| uint32 | Uint32ToBytes(uint32, []byte)
+
 Uint32ToBuf(uint32, io.Writer)
-| uint64 | Uint64ToBytes(uint64, []byte) +
+| uint64 | Uint64ToBytes(uint64, []byte)
+
 Uint64ToBuf(uint64, io.Writer)
 |===
 +
