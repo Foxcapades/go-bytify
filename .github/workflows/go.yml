@@ -29,6 +29,6 @@ jobs:
       
     - name: Coverage
       env:
-        CODECOVE_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: bash <(curl -s https://codecov.io/bash)
       if: ${{ env.CODECOV_TOKEN != '' }}
