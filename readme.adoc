@@ -77,5 +77,5 @@ Uint64ToBuf(uint64, io.Writer)
 | uint64 | Uint64StringSize(uint64)
 |===
 +
-There will be no breaking changes to these functions before `v1.0.0` is released.
+There will be no breaking changes to these functions before `v2.0.0` is released.
 
