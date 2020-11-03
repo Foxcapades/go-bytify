@@ -28,5 +28,7 @@ jobs:
       run: go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
       
     - name: Coverage
+      env:
+        CODECOVE_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: bash <(curl -s https://codecov.io/bash)
       if: ${{ env.CODECOV_TOKEN != '' }}
