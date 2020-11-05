@@ -1,119 +1,106 @@
 package main
 
 import (
-	"fmt"
 	"math"
-	"strconv"
+	"os"
 	"time"
 
-	"github.com/foxcapades/go-bytify/v0/bytify"
+	"github.com/gosuri/uiprogress"
+
+	"github.com/foxcapades/go-bytify/v0/tools/bench/internal"
 )
 
 const (
 	cycles     = 100
 	iterations = 10_000_000
-
-	inputValue uint64 = 660_000_000_000
-	bufferSize = 12
-
 	confidence float64 = 1.96
 )
 
+var (
+	u8Vals = []uint64{
+		0,
+		0x7F,
+		0xFF,
+	}
+
+	u16Vals = append(u8Vals,
+		0x7FFF,
+		0xFFFF,
+	)
+
+	u32Vals = append(u16Vals,
+		0x7FFF_FFFF,
+		0xFFFF_FFFF,
+	)
+
+	u64Vals = append(u32Vals,
+		0x7FFF_FFFF_FFFF_FFFF,
+		0xFFFF_FFFF_FFFF_FFFF,
+	)
+
+	bfFuncs = []*internal.TestConfig{
+		{"Uint8ToBytes",  internal.Uint8ToBytes, u8Vals, internal.StdLibToBytes },
+		{"Uint16ToBytes", internal.Uint16ToBytes, u16Vals, internal.StdLibToBytes },
+		{"Uint32ToBytes", internal.Uint32ToBytes, u32Vals, internal.StdLibToBytes },
+		{"Uint64ToBytes", internal.Uint64ToBytes, u64Vals, internal.StdLibToBytes },
+	}
+)
+
 func main() {
-	funcs := [...]string{
-		"bytify.Uint64ToBytes",
-		"strconv.AppendUint",
-	}
+	uiprogress.Start()
 
-	results := [2][cycles]time.Duration{}
-
-	for cycle := 0; cycle < cycles; cycle++ {
-		results[0][cycle] = Test1()
-		fmt.Print(".")
-		results[1][cycle] = Test2()
-		fmt.Print(".")
-	}
-
-	fmt.Println()
-	fmt.Println("Report:")
-	fmt.Println("  Cycles:    ", cycles)
-	fmt.Println("  Iterations:", iterations)
-	fmt.Println("  Metrics:")
-
-	raw := [2][cycles]float64{}
-	vals := [2]values{}
-	for i := 0; i < 2; i++ {
-		fmt.Println("   ", funcs[i], ":")
-
-		for j := range results[i] {
-			raw[i][j] = float64(results[i][j].Nanoseconds() / iterations)
+	for _, cn := range bfFuncs {
+		name := cn.Name
+		out, err := os.Create("docs/benchmarks/" + name + ".txt")
+		if err != nil {
+			panic(err)
 		}
 
-		vals[i] = stdDev(raw[i])
+		bar := uiprogress.AddBar(cycles)
+		bar.AppendCompleted()
+		bar.PrependElapsed()
+		bar.Width = 100
+		bar.PrependFunc(func(*uiprogress.Bar) string { return name })
 
-		fmt.Println("      Mean:           ", vals[i].mean)
-		fmt.Println("      Std Deviation:  ", vals[i].stdDev)
-		fmt.Println("      Margin of Error:", marginOfError(&vals[i]))
+		rep := new(internal.Report)
+		rep.Iterations = iterations
+		rep.Bytify.Name = "bytify." + name
+		rep.StdLib.Name = "strconv.AppendUint"
+
+		results := [2][cycles]time.Duration{}
+		inputs := cn.Inputs.([]uint64)
+		ln := len(inputs)
+
+		for cycle := 0; cycle < cycles; cycle++ {
+			v := inputs[cycle%ln]
+			results[0][cycle] = cn.Func(v, iterations)
+			results[1][cycle] = cn.Competitor(v, iterations)
+			bar.Incr()
+		}
+
+		raw := [...][]float64{
+			make([]float64, cycles),
+			make([]float64, cycles),
+		}
+		vals := [2]*internal.Stats{&rep.Bytify, &rep.StdLib}
+
+		for i := 0; i < 2; i++ {
+			for j := range results[i] {
+				raw[i][j] = float64(results[i][j].Nanoseconds() / iterations)
+			}
+
+			internal.StdDev(raw[i], vals[i])
+			vals[i].MoE = confidence * (vals[i].StdDev / math.Sqrt(float64(cycles)))
+		}
+
+		rep.Cycles = make([]internal.Cycle, cycles)
+		for i := 0; i < cycles; i++ {
+			rep.Cycles[i].Tool1 = uint16(raw[0][i])
+			rep.Cycles[i].Tool2 = uint16(raw[1][i])
+		}
+
+		internal.PrintReport(rep, out)
+
+		_ = out.Close()
 	}
-
-	fmt.Println("  Cycles (TSV):")
-	fmt.Println("--------------------------------------------------------------------------------")
-	fmt.Println(fmt.Sprintf("\t%s\t%s", funcs[0], funcs[1]))
-	fmt.Println("Cycle\tAvg NS Per Call\tAvg NS Per Call")
-
-	for i := 0; i < cycles; i++ {
-		fmt.Println(fmt.Sprintf("%d\t%.0f\t%.0f", i,
-			raw[0][i],
-			raw[1][i],
-		))
-	}
-}
-
-func Test1() time.Duration {
-	buffer := make([]byte, bufferSize)
-
-	start := time.Now()
-	for i := 0; i < iterations; i++ {
-		bytify.Uint64ToBytes(inputValue, buffer)
-	}
-	return time.Now().Sub(start)
-}
-
-func Test2() time.Duration {
-	buffer := make([]byte, bufferSize)
-
-	start := time.Now()
-	for i := 0; i < iterations; i++ {
-		strconv.AppendUint(buffer, uint64(inputValue), 10)
-	}
-	return time.Now().Sub(start)
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-type values struct {
-	mean   float64
-	stdDev float64
-}
-
-func stdDev(vals [cycles]float64) (out values) {
-	var n, sum, ssq float64
-
-	n = float64(cycles)
-
-	for i := range vals {
-		sum += vals[i]
-		ssq += vals[i] * vals[i]
-	}
-
-	out.mean = sum / n
-	out.stdDev = math.Sqrt(ssq/(n-1) - out.mean*out.mean)
-
-	return
-}
-
-func marginOfError(v *values) float64 {
-	n := float64(cycles)
-
-	return confidence * (v.stdDev / math.Sqrt(n))
 }
