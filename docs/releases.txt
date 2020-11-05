@@ -1,4 +1,34 @@
-####  v0.2.0 ###################################################################
+####  v0.3.0  ##################################################################
+Nov 05 2020
+
+Added the following feature complete methods with full test coverage:
+
+Serialization Methods
+| Type  | Functions                              |
+|-------|----------------------------------------|
+| int8  | Int8ToBytes(int8, []byte) uint8        |
+|       |  Int8ToBuf(int8, io.Writer) uint8      |
+|       |  Int8ToByteSlice(int8) []byte          |
+| int16 | Int16ToBytes(int16, []byte) uint8      |
+|       |   Int16ToBuf(int16, io.Writer) uint8   |
+|       |   Int16ToByteSlice(int16) []byte       |
+| int32 | Int32ToBytes(int32, []byte) uint8      |
+|       |   Int32ToBuf(int32, io.Writer) uint8   |
+|       |   Int32ToByteSlice(int32) []byte       |
+| int64 | Int64ToBytes(int64, []byte) uint8      |
+|       |   Int64ToBuf(int64, io.Writer) uint8   |
+|       |   Int64ToByteSlice(int64) []byte       |
+
+Sizing Methods
+| Type  | Functions                              |
+|-------|----------------------------------------|
+| int8  | Int8StringSize(int8) uint8             |
+| int16 | Int16StringSize(int16) uint8           |
+| int32 | Int32StringSize(int32) uint8           |
+| int64 | Int64StringSize(int64) uint8           |
+
+
+####  v0.2.0  ##################################################################
 Nov 04 2020
 
 Added the following feature complete methods with full test coverage:
@@ -12,7 +42,7 @@ Serialization Methods
 | uint64 | Uint64ToByteSlice(uint64) []byte    |
 
 
-####  v0.1.0 ###################################################################
+####  v0.1.0  ##################################################################
 Nov 03 2020
 
 Added the following feature complete methods with full test coverage:
