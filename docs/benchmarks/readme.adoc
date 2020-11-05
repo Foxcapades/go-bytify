@@ -5,8 +5,12 @@ case scenarios for the `bytify` functions.  Each cycle a value is selected from
 the sets as defined below.  The same value is fed to both the `bytify` and
 `strconv` function for the duration of each cycle.
 
-This is done to get a wider picture of the performance of the functions for a
-more realistic sense of how the functions will operate in practice.
+This is done to get a better picture of the overall performance of the functions
+for a more realistic sense of how the functions will behave in real-world
+scenarios.
+
+Each cycle consists of 10 million calls to each of the `bytify` and `strconv`
+methods using the same input value for the entirety of the cycle.
 
 == Value Sets
 
