@@ -64,18 +64,26 @@ Added the following feature complete methods with full test coverage:
 [cols="1m,4m",options="header"]
 |===
 | Type | Functions
-| int8 | Int8ToBytes(int8, []byte) uint8 +
-         Int8ToBuf(int8, io.Writer) uint8 +
-         Int8ToByteSlice(int8) []byte
-| int16 | Int16ToBytes(int16, []byte) uint8 +
-          Int16ToBuf(int16, io.Writer) uint8 +
-          Int16ToByteSlice(int16) []byte
-| int32 | Int32ToBytes(int32, []byte) uint8 +
-          Int32ToBuf(int32, io.Writer) uint8 +
-          Int32ToByteSlice(int32) []byte
-| int64 | Int64ToBytes(int64, []byte) uint8 +
-          Int64ToBuf(int64, io.Writer) uint8 +
-          Int64ToByteSlice(int64) []byte
+| int8 | Int8ToBytes(int8, []byte) uint8
+
+Int8ToBuf(int8, io.Writer) uint8
+
+Int8ToByteSlice(int8) []byte
+| int16 | Int16ToBytes(int16, []byte) uint8
+
+Int16ToBuf(int16, io.Writer) uint8
+
+Int16ToByteSlice(int16) []byte
+| int32 | Int32ToBytes(int32, []byte) uint8
+
+Int32ToBuf(int32, io.Writer) uint8
+
+Int32ToByteSlice(int32) []byte
+| int64 | Int64ToBytes(int64, []byte) uint8
+
+Int64ToBuf(int64, io.Writer) uint8
+
+Int64ToByteSlice(int64) []byte
 |===
 +
 .Sizing Methods
