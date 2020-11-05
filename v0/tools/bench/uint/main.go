@@ -38,11 +38,15 @@ var (
 		0xFFFF_FFFF_FFFF_FFFF,
 	)
 
-	bfFuncs = []*internal.TestConfig{
-		{"Uint8ToBytes",  internal.Uint8ToBytes, u8Vals, internal.StdLibToBytes },
-		{"Uint16ToBytes", internal.Uint16ToBytes, u16Vals, internal.StdLibToBytes },
-		{"Uint32ToBytes", internal.Uint32ToBytes, u32Vals, internal.StdLibToBytes },
-		{"Uint64ToBytes", internal.Uint64ToBytes, u64Vals, internal.StdLibToBytes },
+	bfFuncs = []*internal.UTestConfig{
+		{"Uint8ToBytes",  internal.Uint8ToBytes, u8Vals, internal.StdLibUintToBytes },
+		{"Uint16ToBytes", internal.Uint16ToBytes, u16Vals, internal.StdLibUintToBytes },
+		{"Uint32ToBytes", internal.Uint32ToBytes, u32Vals, internal.StdLibUintToBytes },
+		{"Uint64ToBytes", internal.Uint64ToBytes, u64Vals, internal.StdLibUintToBytes },
+		{"Uint8ToByteSlice",  internal.Uint8ToByteSlice, u8Vals, internal.StdLibUintToByteSlice },
+		{"Uint16ToByteSlice", internal.Uint16ToByteSlice, u16Vals, internal.StdLibUintToByteSlice },
+		{"Uint32ToByteSlice", internal.Uint32ToByteSlice, u32Vals, internal.StdLibUintToByteSlice },
+		{"Uint64ToByteSlice", internal.Uint64ToByteSlice, u64Vals, internal.StdLibUintToByteSlice },
 	}
 )
 

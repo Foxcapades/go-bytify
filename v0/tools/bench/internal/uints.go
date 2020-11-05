@@ -17,6 +17,19 @@ func Uint8ToBytes(tv uint64, it int) time.Duration {
 	return time.Now().Sub(start)
 }
 
+func Uint8ToByteSlice(tv uint64, it int) time.Duration {
+	var buffer []byte
+	v := uint8(tv)
+
+	start := time.Now()
+	for i := 0; i < it; i++ {
+		buffer = bytify.Uint8ToByteSlice(v)
+	}
+	dummy(buffer)
+
+	return time.Now().Sub(start)
+}
+
 func Uint16ToBytes(tv uint64, it int) time.Duration {
 	v := uint16(tv)
 	buffer := make([]byte, bytify.Uint64StringSize(tv))
@@ -25,6 +38,19 @@ func Uint16ToBytes(tv uint64, it int) time.Duration {
 	for i := 0; i < it; i++ {
 		bytify.Uint16ToBytes(v, buffer)
 	}
+	return time.Now().Sub(start)
+}
+
+func Uint16ToByteSlice(tv uint64, it int) time.Duration {
+	var buffer []byte
+	v := uint16(tv)
+
+	start := time.Now()
+	for i := 0; i < it; i++ {
+		buffer = bytify.Uint16ToByteSlice(v)
+	}
+	dummy(buffer)
+
 	return time.Now().Sub(start)
 }
 
@@ -39,6 +65,19 @@ func Uint32ToBytes(tv uint64, it int) time.Duration {
 	return time.Now().Sub(start)
 }
 
+func Uint32ToByteSlice(tv uint64, it int) time.Duration {
+	var buffer []byte
+	v := uint32(tv)
+
+	start := time.Now()
+	for i := 0; i < it; i++ {
+		buffer = bytify.Uint32ToByteSlice(v)
+	}
+	dummy(buffer)
+
+	return time.Now().Sub(start)
+}
+
 func Uint64ToBytes(tv uint64, it int) time.Duration {
 	buffer := make([]byte, bytify.Uint64StringSize(tv))
 
@@ -49,7 +88,19 @@ func Uint64ToBytes(tv uint64, it int) time.Duration {
 	return time.Now().Sub(start)
 }
 
-func StdLibToBytes(tv uint64, it int) time.Duration {
+func Uint64ToByteSlice(tv uint64, it int) time.Duration {
+	var buffer []byte
+
+	start := time.Now()
+	for i := 0; i < it; i++ {
+		buffer = bytify.Uint64ToByteSlice(tv)
+	}
+	dummy(buffer)
+
+	return time.Now().Sub(start)
+}
+
+func StdLibUintToBytes(tv uint64, it int) time.Duration {
 	buffer := make([]byte, bytify.Uint64StringSize(tv))
 
 	start := time.Now()
@@ -59,3 +110,17 @@ func StdLibToBytes(tv uint64, it int) time.Duration {
 
 	return time.Now().Sub(start)
 }
+
+func StdLibUintToByteSlice(tv uint64, it int) time.Duration {
+	var buffer []byte
+
+	start := time.Now()
+	for i := 0; i < it; i++ {
+		buffer = strconv.AppendUint(nil, tv, 10)
+	}
+	dummy(buffer)
+
+	return time.Now().Sub(start)
+}
+
+func dummy([]byte) {}
