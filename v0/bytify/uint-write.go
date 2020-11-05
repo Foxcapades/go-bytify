@@ -103,7 +103,7 @@ func Uint16ToBuf(v uint16, buf Writer) uint8 {
 // WARNING: This method makes no attempt to verify that the input slice is not
 // nil or even if it has the capacity to contain the given value.
 //
-// Returns the number of bytes written to the given buffer. // TODO: given 66000 it needed 6 spaces?
+// Returns the number of bytes written to the given buffer.
 func Uint32ToBytes(v uint32, buf []byte) uint8 {
 	pos := uint32StartPos(v)
 	cur := v
