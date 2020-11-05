@@ -26,23 +26,30 @@ func Uint8ToBytes(v uint8, buf []byte) uint8 {
 	return uint8(pos + 1)
 }
 
+// Uint8ToByteSlice returns a new byte slice with the string representation of
+// the given uint8 value.
+func Uint8ToByteSlice(v uint8) (out []byte) {
+	sz := Uint8StringSize(v)
+	out = make([]byte, sz)
+
+	for pos := int8(sz) - 1; pos > -1; pos-- {
+		out[pos] = v%base + '0'
+		v /= base
+	}
+
+	return
+}
+
 // Uint8ToBuf writes the the string representation of the given uint8 value to
 // the given writer.
 //
 // Returns the number of bytes written to the given buffer.
 func Uint8ToBuf(v uint8, buf Writer) uint8 {
-	sz := Uint8StringSize(v)
-	tmp := make([]byte, sz)
-	cur := v
-
-	for pos := int8(sz) - 1; pos > -1; pos-- {
-		tmp[pos] = cur%base + '0'
-		cur /= base
-	}
+	tmp := Uint8ToByteSlice(v)
 
 	_, _ = buf.Write(tmp)
 
-	return sz
+	return uint8(len(tmp))
 }
 
 // Uint16ToBytes populates the given byte slice with the string representation
@@ -64,24 +71,30 @@ func Uint16ToBytes(v uint16, buf []byte) uint8 {
 	return uint8(pos + 1)
 }
 
+// Uint16ToByteSlice returns a new byte slice with the string representation of
+// the given uint16 value.
+func Uint16ToByteSlice(v uint16) (out []byte) {
+	sz := Uint16StringSize(v)
+	out = make([]byte, sz)
+
+	for pos := int8(sz) - 1; pos > -1; pos-- {
+		out[pos] = byte(v%base) + '0'
+		v /= base
+	}
+
+	return
+}
+
 // Uint16ToBuf writes the the string representation of the given uint16 value to
 // the given writer.
 //
 // Returns the number of bytes written to the given buffer.
 func Uint16ToBuf(v uint16, buf Writer) uint8 {
-	sz := Uint16StringSize(v)
-	tmp := make([]byte, sz)
-
-	cur := v
-
-	for pos := int8(sz) - 1; pos > -1; pos-- {
-		tmp[pos] = byte(cur%base) + '0'
-		cur /= base
-	}
+	tmp := Uint16ToByteSlice(v)
 
 	_, _ = buf.Write(tmp)
 
-	return sz
+	return uint8(len(tmp))
 }
 
 // Uint32ToBytes populates the given byte slice with the string representation
@@ -103,23 +116,30 @@ func Uint32ToBytes(v uint32, buf []byte) uint8 {
 	return uint8(pos + 1)
 }
 
+// Uint32ToByteSlice returns a new byte slice with the string representation of
+// the given uint32 value.
+func Uint32ToByteSlice(v uint32) (out []byte) {
+	sz := Uint32StringSize(v)
+	out = make([]byte, sz)
+
+	for pos := int8(sz) - 1; pos > -1; pos-- {
+		out[pos] = byte(v%base) + '0'
+		v /= base
+	}
+
+	return
+}
+
 // Uint32ToBuf writes the the string representation of the given uint32 value to
 // the given writer.
 //
 // Returns the number of bytes written to the given buffer.
 func Uint32ToBuf(v uint32, buf Writer) uint8 {
-	sz := Uint32StringSize(v)
-	tmp := make([]byte, sz)
-	cur := v
-
-	for pos := int8(sz) - 1; pos > -1; pos-- {
-		tmp[pos] = byte(cur%base) + '0'
-		cur /= base
-	}
+	tmp := Uint32ToByteSlice(v)
 
 	_, _ = buf.Write(tmp)
 
-	return sz
+	return uint8(len(tmp))
 }
 
 // Uint64ToBytes populates the given byte slice with the string representation
@@ -141,23 +161,30 @@ func Uint64ToBytes(v uint64, buf []byte) uint8 {
 	return uint8(pos + 1)
 }
 
-// Uint64ToBuf writes the the string representation of the given uint32 value to
+// Uint64ToByteSlice returns a new byte slice with the string representation of
+// the given uint64 value.
+func Uint64ToByteSlice(v uint64) (out []byte) {
+	sz := Uint64StringSize(v)
+	out = make([]byte, sz)
+
+	for pos := int8(sz) - 1; pos > -1; pos-- {
+		out[pos] = byte(v%base) + '0'
+		v /= base
+	}
+
+	return
+}
+
+// Uint64ToBuf writes the the string representation of the given uint64 value to
 // the given writer.
 //
 // Returns the number of bytes written to the given buffer.
 func Uint64ToBuf(v uint64, buf Writer) uint8 {
-	sz := Uint64StringSize(v)
-	tmp := make([]byte, sz)
-	cur := v
-
-	for pos := int8(sz) - 1; pos > -1; pos-- {
-		tmp[pos] = byte(cur%base) + '0'
-		cur /= base
-	}
+	tmp := Uint64ToByteSlice(v)
 
 	_, _ = buf.Write(tmp)
 
-	return sz
+	return uint8(len(tmp))
 }
 
 func uint8StartPos(v uint8) int8 {

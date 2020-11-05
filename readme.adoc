@@ -51,40 +51,54 @@ benchmark script `\{version}/tools/bench/main.go`.
 The cycles/iterations used is 100 cycles of 10,000,000 iterations each (meaning
 1 billion calls to each of the `bytify` and `strconv` functions).
 
-To summarize the results, the bytify functions under test performed ~50.2625ns
-faster than the only comparable standard library function `strconv.AppendUint`.
-
 == Change Log
+
+Only the last 3 releases will be shown here.  For further info see the
+link:docs/releases.txt[`docs/releases.txt`] file.
+
+`v0.2.0`::
+Added the following feature complete methods with full test coverage:
++
+.Serialization Methods
+[cols="1m,4m",options="header"]
+|===
+| Type | Functions
+| uint8 | Uint8ToByteSlice(uint8) []byte
+| uint16 | Uint16ToByteSlice(uint16) []byte
+| uint32 | Uint32ToByteSlice(uint32) []byte
+| uint64 | Uint64ToByteSlice(uint64) []byte
+|===
+
 
 `v0.1.0`::
 Added the following feature complete methods with full test coverage:
 +
 .Serialization Methods
-[cols="1m,2m",options="header"]
+[cols="1m,4m",options="header"]
 |===
 | Type | Functions
-| uint8 | Uint8ToBytes(uint8, []byte)
+| uint8 | Uint8ToBytes(uint8, []byte) uint8
 
-Uint8ToBuf(uint8, io.Writer)
-| uint16 | Uint16ToBytes(uint16, []byte)
+Uint8ToBuf(uint8, io.Writer) uint8
+| uint16 | Uint16ToBytes(uint16, []byte) uint8
 
-Uint16ToBuf(uint16, io.Writer)
-| uint32 | Uint32ToBytes(uint32, []byte)
+Uint16ToBuf(uint16, io.Writer) uint8
+| uint32 | Uint32ToBytes(uint32, []byte) uint8
 
-Uint32ToBuf(uint32, io.Writer)
-| uint64 | Uint64ToBytes(uint64, []byte)
+Uint32ToBuf(uint32, io.Writer) uint8
+| uint64 | Uint64ToBytes(uint64, []byte) uint8
 
-Uint64ToBuf(uint64, io.Writer)
+Uint64ToBuf(uint64, io.Writer) uint8
 |===
 +
 .Sizing Methods
-[cols="1m,2m",options="header"]
+[cols="1m,4m",options="header"]
 |===
 | Type   | Functions
-| uint8  | Uint8StringSize(uint8)
-| uint16 | Uint16StringSize(uint16)
-| uint32 | Uint32StringSize(uint32)
-| uint64 | Uint64StringSize(uint64)
+| uint8  | Uint8StringSize(uint8) uint8
+| uint16 | Uint16StringSize(uint16) uint8
+| uint32 | Uint32StringSize(uint32) uint8
+| uint64 | Uint64StringSize(uint64) uint8
 |===
 +
 There will be no breaking changes to these functions before `v2.0.0` is released.

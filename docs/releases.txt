@@ -1,0 +1,38 @@
+####  v0.2.0 ###################################################################
+Nov 04 2020
+
+Added the following feature complete methods with full test coverage:
+
+Serialization Methods
+| Type   | Functions                           |
+|--------|-------------------------------------|
+| uint8  | Uint8ToByteSlice(uint8) []byte      |
+| uint16 | Uint16ToByteSlice(uint16) []byte    |
+| uint32 | Uint32ToByteSlice(uint32) []byte    |
+| uint64 | Uint64ToByteSlice(uint64) []byte    |
+
+
+####  v0.1.0 ###################################################################
+Nov 03 2020
+
+Added the following feature complete methods with full test coverage:
+
+Serialization Methods
+| Type   | Functions                              |
+|--------|----------------------------------------|
+| uint8  | Uint8ToBytes(uint8, []byte) uint8      |
+|        | Uint8ToBuf(uint8, io.Writer) uint8     |
+| uint16 | Uint16ToBytes(uint16, []byte) uint8    |
+|        | Uint16ToBuf(uint16, io.Writer) uint8   |
+| uint32 | Uint32ToBytes(uint32, []byte) uint8    |
+|        | Uint32ToBuf(uint32, io.Writer) uint8   |
+| uint64 | Uint64ToBytes(uint64, []byte) uint8    |
+|        | Uint64ToBuf(uint64, io.Writer) uint8   |
+
+Sizing Methods
+| Type   | Functions                              |
+|--------|----------------------------------------|
+| uint8  | Uint8StringSize(uint8) uint8           |
+| uint16 | Uint16StringSize(uint16) uint8         |
+| uint32 | Uint32StringSize(uint32) uint8         |
+| uint64 | Uint64StringSize(uint64) uint8         |

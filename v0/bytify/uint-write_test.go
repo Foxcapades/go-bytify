@@ -185,3 +185,35 @@ func TestUint64ToBuf(t *testing.T) {
 		}
 	})
 }
+
+func TestUint8ToByteSlice(t *testing.T) {
+	Convey("Uint8ToByteSlice", t, func() {
+		for i := 255; i > -1; i-- {
+			So(Uint8ToByteSlice(uint8(i)), ShouldResemble, []byte(strconv.Itoa(i)))
+		}
+	})
+}
+
+func TestUint16ToByteSlice(t *testing.T) {
+	Convey("Uint16ToByteSlice", t, func() {
+		for i := 65535; i > -1; i -= 257 {
+			So(Uint16ToByteSlice(uint16(i)), ShouldResemble, []byte(strconv.Itoa(i)))
+		}
+	})
+}
+
+func TestUint32ToByteSlice(t *testing.T) {
+	Convey("Uint32ToByteSlice", t, func() {
+		for i := 4294967295; i > -1; i -= 16843009 {
+			So(Uint32ToByteSlice(uint32(i)), ShouldResemble, []byte(strconv.Itoa(i)))
+		}
+	})
+}
+
+func TestUint64ToByteSlice(t *testing.T) {
+	Convey("Uint64ToByteSlice", t, func() {
+		for i := uint64(18446744073709551615); i > 0; i -= uint64(72340172838076673) {
+			So(Uint64ToByteSlice(i), ShouldResemble, []byte(strconv.FormatUint(i, 10)))
+		}
+	})
+}
