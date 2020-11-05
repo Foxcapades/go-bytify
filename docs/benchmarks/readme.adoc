@@ -1,9 +1,8 @@
 = Benchmarks
 
 The benchmarks contained in this directory are setup to hit best through worst
-case scenarios for the `bytify` functions.  Each cycle a value is selected from
-the sets as defined below.  The same value is fed to both the `bytify` and
-`strconv` function for the duration of each cycle.
+case scenarios for the `bytify` functions. The same value is fed to both the
+`bytify` and `strconv` function for the duration of each cycle.
 
 This is done to get a better picture of the overall performance of the functions
 for a more realistic sense of how the functions will behave in real-world
@@ -12,67 +11,19 @@ scenarios.
 Each cycle consists of 10 million calls to each of the `bytify` and `strconv`
 methods using the same input value for the entirety of the cycle.
 
-== Value Sets
+== Comparisons
 
-The following sets of values are fed sequentially to the tests, starting back
-at the first value when the end of the list is reached.
+The following comparisons are based on the output data in this directory.
 
-=== Uints
+=== Filling a Presized Buffer
 
-The Uint functions are fed the following value sets of values:
+image::https://github.com/Foxcapades/go-bytify/raw/main/docs/assets/to-bytes.png[]
 
-Uint8 Tests::
-+
-[source, json]
-----
-[
-  0,
-  127,
-  255
-]
-----
+=== Create and Fill New Buffer
 
-Uint16 Tests::
-+
-[source, json]
-----
-[
-  0,
-  127,
-  255,
-  32767,
-  65535
-]
-----
+image::https://github.com/Foxcapades/go-bytify/raw/main/docs/assets/to-byte-slice.png[]
 
-Uint32 Tests::
-+
-[source, json]
-----
-[
-  0,
-  127,
-  255,
-  32767,
-  65535,
-  2147483647,
-  4294967295
-]
-----
-
-Uint64 Tests::
-+
-[source, json]
-----
-[
-  0,
-  127,
-  255,
-  32767,
-  65535,
-  2147483647,
-  4294967295,
-  9223372036854775807,
-  18446744073709551615
-]
-----
+NOTE: The `Int64ToByteSlice` function presently executes as fast or marginally
+slower (approximately 1ns) than the standard library function.  This function
+is presently included for completeness and will hopefully be better tuned in
+future releases.
