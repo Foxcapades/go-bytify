@@ -6,8 +6,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gosuri/uiprogress"
-
 	"github.com/foxcapades/go-bytify/v0/bytify"
 )
 
