@@ -69,6 +69,7 @@ Added the following feature complete methods with full test coverage:
 | uint64 | Uint64ToByteSlice(uint64) []byte
 |===
 
+There will be no breaking changes to these functions before v2.0.0 is released.
 
 `v0.1.0`::
 Added the following feature complete methods with full test coverage:
