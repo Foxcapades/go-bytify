@@ -1,5 +1,15 @@
 package bytify
 
+const (
+	minI16 int32 = -32768
+	minI32 int64 = -2147483648
+
+	maxI16 int32 = 32767
+	maxI32 int64 = 2147483647
+)
+
+////////////////////////////////////////////////////////////////////////////////
+
 // Int8StringSize returns the number of characters required to represent the
 // given value as a string.
 func Int8StringSize(v int8) uint8 {
@@ -33,7 +43,6 @@ func pInt8StringSize(v int8) uint8 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
 
 // Int16StringSize returns the number of characters required to represent the
 // given value as a string.
@@ -89,6 +98,8 @@ func Int32StringSize(v int32) uint8 {
 
 func nInt32StringSize(v int32) uint8 {
 	switch true {
+	case v >= minI16:
+		return nInt16StringSize(int16(v))
 	case v < -999_999_999:
 		return 11
 	case v < -99_999_999:
@@ -99,21 +110,15 @@ func nInt32StringSize(v int32) uint8 {
 		return 8
 	case v < -99_999:
 		return 7
-	case v < -9_999:
-		return 6
-	case v < -999:
-		return 5
-	case v < -99:
-		return 4
-	case v < -9:
-		return 3
 	default:
-		return 2
+		return 6
 	}
 }
 
 func pInt32StringSize(v int32) uint8 {
 	switch true {
+	case v <= maxI16:
+		return pInt16StringSize(int16(v))
 	case v > 999_999_999:
 		return 10
 	case v > 99_999_999:
@@ -124,16 +129,8 @@ func pInt32StringSize(v int32) uint8 {
 		return 7
 	case v > 99_999:
 		return 6
-	case v > 9_999:
-		return 5
-	case v > 999:
-		return 4
-	case v > 99:
-		return 3
-	case v > 9:
-		return 2
 	default:
-		return 1
+		return 5
 	}
 }
 
@@ -151,6 +148,8 @@ func Int64StringSize(v int64) uint8 {
 
 func nInt64StringSize(v int64) uint8 {
 	switch true {
+	case v >= minI32:
+		return nInt32StringSize(int32(v))
 	case v < -999_999_999_999_999_999:
 		return 20
 	case v < -99_999_999_999_999_999:
@@ -169,31 +168,15 @@ func nInt64StringSize(v int64) uint8 {
 		return 13
 	case v < -9_999_999_999:
 		return 12
-	case v < -999_999_999:
-		return 11
-	case v < -99_999_999:
-		return 10
-	case v < -9_999_999:
-		return 9
-	case v < -999_999:
-		return 8
-	case v < -99_999:
-		return 7
-	case v < -9_999:
-		return 6
-	case v < -999:
-		return 5
-	case v < -99:
-		return 4
-	case v < -9:
-		return 3
 	default:
-		return 2
+		return 11
 	}
 }
 
 func pInt64StringSize(v int64) uint8 {
 	switch true {
+	case v <= maxI32:
+		return pInt32StringSize(int32(v))
 	case v > 999_999_999_999_999_999:
 		return 19
 	case v > 99_999_999_999_999_999:
@@ -212,25 +195,7 @@ func pInt64StringSize(v int64) uint8 {
 		return 12
 	case v > 9_999_999_999:
 		return 11
-	case v > 999_999_999:
-		return 10
-	case v > 99_999_999:
-		return 9
-	case v > 9_999_999:
-		return 8
-	case v > 999_999:
-		return 7
-	case v > 99_999:
-		return 6
-	case v > 9_999:
-		return 5
-	case v > 999:
-		return 4
-	case v > 99:
-		return 3
-	case v > 9:
-		return 2
 	default:
-		return 1
+		return 10
 	}
 }

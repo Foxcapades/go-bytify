@@ -77,12 +77,12 @@ var (
 func TestInt8ToBytes(t *testing.T) {
 	Convey("Int8ToBytes", t, func() {
 		for _, test := range int8s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := make([]byte, test.size)
 				Convey("when given int8("+stdForm+")", func() {
-					Int8ToBytes(int8(test.raw), buffer)
 
+					So(Int8ToBytes(int8(test.raw), buffer), ShouldEqual, test.size)
 					So(string(buffer), ShouldResemble, test.val)
 				})
 			})
@@ -93,46 +93,44 @@ func TestInt8ToBytes(t *testing.T) {
 func TestInt16ToBytes(t *testing.T) {
 	Convey("Int16ToBytes", t, func() {
 		for _, test := range int16s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := make([]byte, test.size)
 				Convey("when given int16("+stdForm+")", func() {
-					Int16ToBytes(int16(test.raw), buffer)
 
+					So(Int16ToBytes(int16(test.raw), buffer), ShouldEqual, test.size)
 					So(string(buffer), ShouldResemble, test.val)
 				})
 			})
 		}
 	})
 }
-
 
 func TestInt32ToBytes(t *testing.T) {
 	Convey("Int32ToBytes", t, func() {
 		for _, test := range int32s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := make([]byte, test.size)
 				Convey("when given int32("+stdForm+")", func() {
-					Int32ToBytes(int32(test.raw), buffer)
 
+					So(Int32ToBytes(int32(test.raw), buffer), ShouldEqual, test.size)
 					So(string(buffer), ShouldResemble, test.val)
 				})
 			})
 		}
 	})
 }
-
 
 func TestInt64ToBytes(t *testing.T) {
 	Convey("Int64ToBytes", t, func() {
 		for _, test := range int64s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := make([]byte, test.size)
 				Convey("when given int64("+stdForm+")", func() {
-					Int64ToBytes(test.raw, buffer)
 
+					So(Int64ToBytes(test.raw, buffer), ShouldEqual, test.size)
 					So(string(buffer), ShouldResemble, test.val)
 				})
 			})
@@ -140,11 +138,10 @@ func TestInt64ToBytes(t *testing.T) {
 	})
 }
 
-
 func TestInt8ToBuf(t *testing.T) {
 	Convey("Int8ToBuf", t, func() {
 		for _, test := range int8s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := new(bytes.Buffer)
 				Convey("when given int8("+stdForm+")", func() {
@@ -160,7 +157,7 @@ func TestInt8ToBuf(t *testing.T) {
 func TestInt16ToBuf(t *testing.T) {
 	Convey("Int16ToBuf", t, func() {
 		for _, test := range int16s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := new(bytes.Buffer)
 				Convey("when given int16("+stdForm+")", func() {
@@ -173,12 +170,11 @@ func TestInt16ToBuf(t *testing.T) {
 	})
 }
 
-
 func TestInt32ToBuf(t *testing.T) {
 	Convey("Int32ToBuf", t, func() {
 		for _, test := range int32s {
 
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := new(bytes.Buffer)
 				Convey("when given int32("+stdForm+")", func() {
@@ -191,11 +187,10 @@ func TestInt32ToBuf(t *testing.T) {
 	})
 }
 
-
 func TestInt64ToBuf(t *testing.T) {
 	Convey("Int64ToBuf", t, func() {
 		for _, test := range int64s {
-			Convey(`returns "` + test.val + `"`, func() {
+			Convey(`returns "`+test.val+`"`, func() {
 				stdForm := strconv.FormatInt(test.raw, 10)
 				buffer := new(bytes.Buffer)
 				Convey("when given int64("+stdForm+")", func() {

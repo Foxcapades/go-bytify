@@ -19,14 +19,12 @@ func Int8ToBytes(tv int64, it int) time.Duration {
 }
 
 func Int8ToByteSlice(tv int64, it int) time.Duration {
-	var buffer []byte
 	v := int8(tv)
 
 	start := time.Now()
 	for i := 0; i < it; i++ {
 		buffer = bytify.Int8ToByteSlice(v)
 	}
-	dummy(buffer)
 
 	return time.Now().Sub(start)
 }
@@ -43,14 +41,12 @@ func Int16ToBytes(tv int64, it int) time.Duration {
 }
 
 func Int16ToByteSlice(tv int64, it int) time.Duration {
-	var buffer []byte
 	v := int16(tv)
 
 	start := time.Now()
 	for i := 0; i < it; i++ {
 		buffer = bytify.Int16ToByteSlice(v)
 	}
-	dummy(buffer)
 
 	return time.Now().Sub(start)
 }
@@ -67,14 +63,12 @@ func Int32ToBytes(tv int64, it int) time.Duration {
 }
 
 func Int32ToByteSlice(tv int64, it int) time.Duration {
-	var buffer []byte
 	v := int32(tv)
 
 	start := time.Now()
 	for i := 0; i < it; i++ {
 		buffer = bytify.Int32ToByteSlice(v)
 	}
-	dummy(buffer)
 
 	return time.Now().Sub(start)
 }
@@ -90,13 +84,10 @@ func Int64ToBytes(tv int64, it int) time.Duration {
 }
 
 func Int64ToByteSlice(tv int64, it int) time.Duration {
-	var buffer []byte
-
 	start := time.Now()
 	for i := 0; i < it; i++ {
 		buffer = bytify.Int64ToByteSlice(tv)
 	}
-	dummy(buffer)
 
 	return time.Now().Sub(start)
 }
@@ -113,13 +104,10 @@ func StdLibIntToBytes(tv int64, it int) time.Duration {
 }
 
 func StdLibIntToByteSlice(tv int64, it int) time.Duration {
-	var buffer []byte
-
 	start := time.Now()
 	for i := 0; i < it; i++ {
 		buffer = strconv.AppendInt(nil, tv, 10)
 	}
-	dummy(buffer)
 
 	return time.Now().Sub(start)
 }
