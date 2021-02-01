@@ -22,7 +22,7 @@ you're saving.
 .Install
 [source,sh-session]
 ----
-$ go get github.com/foxcapades/v0/go-bytify
+$ go get github.com/foxcapades/go-bytify/v0/bytify
 ----
 
 .Example Usage
